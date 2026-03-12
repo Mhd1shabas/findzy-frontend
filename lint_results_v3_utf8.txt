@@ -1,0 +1,125 @@
+﻿
+> findzy-client@0.1.0 lint
+> eslint
+
+
+C:\Findzy\frontend\app\browse-services\page.tsx
+   8:10  warning  'Card' is defined but never used                                                                                                                              @typescript-eslint/no-unused-vars
+  10:10  warning  'Heart' is defined but never used                                                                                                                             @typescript-eslint/no-unused-vars
+  65:6   warning  React Hook useEffect has a missing dependency: 'filters.category'. Either include it or remove the dependency array                                           react-hooks/exhaustive-deps
+  73:6   warning  React Hook useEffect has missing dependencies: 'fetchCurrentUser', 'fetchFavorites', and 'fetchServices'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  96:37  error    Unexpected any. Specify a different type                                                                                                                      @typescript-eslint/no-explicit-any
+
+C:\Findzy\frontend\app\dashboard\bookings\page.tsx
+   9:3  warning  'MapPin' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+  16:3  warning  'MessageCircle' is defined but never used                                                                     @typescript-eslint/no-unused-vars
+  36:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\dashboard\favorites\page.tsx
+  26:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\dashboard\page.tsx
+  59:6  warning  React Hook useEffect has a missing dependency: 'fetchDashboardData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\dashboard\photos\page.tsx
+  93:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\app\dashboard\profile\page.tsx
+   56:6   warning  React Hook useEffect has missing dependencies: 'fetchProfile' and 'token'. Either include them or remove the dependency array                                                                                                                                                            react-hooks/exhaustive-deps
+  185:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\app\dashboard\provider\bookings\page.tsx
+   18:8   warning  'Link' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   22:46  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   23:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   35:8   warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array                                                                                                                                                                             react-hooks/exhaustive-deps
+  144:49  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\app\dashboard\requests\page.tsx
+   5:3  warning  'MoreVertical' is defined but never used                                                                                                                 @typescript-eslint/no-unused-vars
+   6:3  warning  'Briefcase' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  63:6  warning  React Hook useEffect has missing dependencies: 'fetchRequests', 'fetchStats', 'router', and 'token'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\dashboard\services\edit\[id]\page.tsx
+   6:38  warning  'MapPin' is defined but never used                                                                                              @typescript-eslint/no-unused-vars
+   6:59  warning  'Clock' is defined but never used                                                                                               @typescript-eslint/no-unused-vars
+  35:6   warning  React Hook useEffect has missing dependencies: 'fetchService' and 'router'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\dashboard\services\page.tsx
+   11:3   warning  'Search' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   17:3   warning  'MoreVertical' is defined but never used                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   34:6   warning  React Hook useEffect has a missing dependency: 'fetchUserAndServices'. Either include it or remove the dependency array                                                                                                                                                                  react-hooks/exhaustive-deps
+  167:27  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  181:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\app\dashboard\settings\page.tsx
+   9:15  warning  'SettingsIcon' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+  42:6   warning  React Hook useEffect has a missing dependency: 'fetchUserData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\profile\setup\page.tsx
+  55:6   warning  React Hook useEffect has missing dependencies: 'fetchProfile', 'router', and 'token'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  73:15  warning  'userRes' is assigned a value but never used                                                                                              @typescript-eslint/no-unused-vars
+
+C:\Findzy\frontend\app\provider\[id]\page.tsx
+   4:21  warning  'useRouter' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  21:8   warning  React Hook useEffect has a missing dependency: 'fetchProviderData'. Either include it or remove the dependency array                                                                                                                                                                     react-hooks/exhaustive-deps
+  89:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\app\requests\[id]\page.tsx
+  70:6  warning  React Hook useEffect has missing dependencies: 'fetchRequest', 'router', and 'token'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Findzy\frontend\app\services\[id]\page.tsx
+   72:6   warning  React Hook useEffect has missing dependencies: 'fetchCurrentUser', 'fetchFavoriteStatus', 'fetchReviews', and 'fetchService'. Either include them or remove the dependency array                                                                                                         react-hooks/exhaustive-deps
+  107:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  322:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  346:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\app\services\create\page.tsx
+    8:24  warning  'ChevronLeft' is defined but never used                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   65:54  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  209:21  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  363:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\components\dashboard\ProviderDashboard.tsx
+   10:38  warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   46:14  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   53:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Findzy\frontend\components\dashboard\ProviderDashboard.tsx:53:7
+  51 |   useEffect(() => {
+  52 |     if (token) {
+> 53 |       fetchNotifications();
+     |       ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  54 |     }
+  55 |   }, [token]);
+  56 |  react-hooks/set-state-in-effect
+   55:6   warning  React Hook useEffect has a missing dependency: 'fetchNotifications'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
+   77:14  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  166:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @next/next/no-img-element
+
+C:\Findzy\frontend\components\dashboard\RecentServices.tsx
+  37:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  51:23  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\components\dashboard\Sidebar.tsx
+  94:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\components\shared\ChatModal.tsx
+   38:8   warning  React Hook useEffect has a missing dependency: 'fetchMessages'. Either include it or remove the dependency array                                                                                                                                                                         react-hooks/exhaustive-deps
+  130:57  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Findzy\frontend\components\shared\ServiceCard.tsx
+    5:17  warning  'MapPin' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+    5:25  warning  'Tag' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  108:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  124:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  151:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+Γ£û 61 problems (7 errors, 54 warnings)
+
