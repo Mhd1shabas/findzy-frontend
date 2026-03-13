@@ -86,7 +86,15 @@ export default function ProviderProfilePage() {
                 <div className="bg-white rounded-2xl shadow-sm p-8 sm:p-10 mb-8 flex flex-col sm:flex-row gap-8 items-start sm:items-center">
                     <div className="w-32 h-32 rounded-full border-4 border-white shadow-lg bg-emerald-100 flex items-center justify-center text-4xl font-bold text-emerald-600 overflow-hidden shrink-0">
                         {provider.photos && provider.photos.length > 0 ? (
-                            <img src={provider.photos[0]} alt={provider.name} className="w-full h-full object-cover" />
+                            (() => {
+                                let photo = provider.photos[0];
+                                if (photo.includes('localhost:5000') || photo.includes('findzy-backend-1.onrender.com')) {
+                                    const parts = photo.split('/uploads/');
+                                    if (parts.length > 1) photo = `/uploads/${parts[1]}`;
+                                }
+                                const src = photo.startsWith('http') ? photo : `${API_URL}${photo}`;
+                                return <img src={src} alt={provider.name} className="w-full h-full object-cover" />;
+                            })()
                         ) : (
                             provider.name?.charAt(0) || "P"
                         )}
