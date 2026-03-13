@@ -259,9 +259,22 @@ export default function ServiceDetailPage() {
     );
   }
 
-  // Handle images securely
+  // Handle images securely and handle legacy local URLs
   const images = (service.serviceImages?.length ? service.serviceImages : service.images) || [];
-  const processedImages = images.map(img => img.startsWith('http') ? img : `${API_URL}${img}`);
+  const processedImages = images.map(img => {
+    if (typeof img !== 'string') return '';
+    
+    let processedImg = img;
+    // Fix for hardcoded URLs in DB
+    if (processedImg.includes('localhost:5000') || processedImg.includes('findzy-backend-1.onrender.com')) {
+      const parts = processedImg.split('/uploads/');
+      if (parts.length > 1) {
+        processedImg = `/uploads/${parts[1]}`;
+      }
+    }
+
+    return processedImg.startsWith('http') ? processedImg : `${API_URL}${processedImg}`;
+  }).filter(Boolean);
 
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % processedImages.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + processedImages.length) % processedImages.length);
