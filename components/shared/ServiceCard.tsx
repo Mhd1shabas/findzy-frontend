@@ -97,9 +97,17 @@ export default function ServiceCard({
                 (service.image ? [service.image] : [])));
 
           if (images && images.length > 0) {
-            const firstImage = images[0];
-            // Ensure firstImage is a string and handle relative paths correctly
+            let firstImage = images[0];
+            
             if (typeof firstImage === 'string') {
+              // Fix for hardcoded URLs in DB: if it contains localhost or onrender, extract the relative path
+              if (firstImage.includes('localhost:5000') || firstImage.includes('findzy-backend-1.onrender.com')) {
+                const parts = firstImage.split('/uploads/');
+                if (parts.length > 1) {
+                  firstImage = `/uploads/${parts[1]}`;
+                }
+              }
+
               const src = firstImage.startsWith('http')
                 ? firstImage
                 : (firstImage.startsWith('/') ? `${API_URL}${firstImage}` : `${API_URL}/${firstImage}`);
@@ -110,7 +118,6 @@ export default function ServiceCard({
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   onError={(e) => {
-                    // Fallback to placeholder if image fails to load
                     (e.target as HTMLImageElement).src = "/images/service-placeholder.png";
                   }}
                 />
