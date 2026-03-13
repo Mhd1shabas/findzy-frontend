@@ -183,7 +183,17 @@ export default function EditProfilePage() {
             <div className="absolute -bottom-16 left-8">
               <div className="h-32 w-32 rounded-2xl border-4 border-white overflow-hidden bg-white shadow-lg group relative">
                 <img
-                  src={profilePreview || "/default-avatar.png"}
+                  src={(() => {
+                    if (!profilePreview) return "/default-avatar.png";
+                    if (profilePreview.startsWith('blob:')) return profilePreview; // Local upload preview
+                    
+                    let src = profilePreview;
+                    if (src.includes('localhost:5000') || src.includes('findzy-backend-1.onrender.com')) {
+                      const parts = src.split('/uploads/');
+                      if (parts.length > 1) src = `/uploads/${parts[1]}`;
+                    }
+                    return src.startsWith('http') ? src : `${API_URL}${src}`;
+                  })()}
                   alt="Profile"
                   className="h-full w-full object-cover"
                 />
