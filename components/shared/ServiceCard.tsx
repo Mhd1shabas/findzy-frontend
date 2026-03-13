@@ -155,7 +155,15 @@ export default function ServiceCard({
         <div className="flex items-center gap-2 mb-3">
           <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-[10px] overflow-hidden">
             {service.provider?.photos && service.provider.photos.length > 0 ? (
-              <img src={service.provider.photos[0]} alt="provider" className="w-full h-full object-cover" />
+              (() => {
+                let photo = service.provider.photos[0];
+                if (photo.includes('localhost:5000') || photo.includes('findzy-backend-1.onrender.com')) {
+                  const parts = photo.split('/uploads/');
+                  if (parts.length > 1) photo = `/uploads/${parts[1]}`;
+                }
+                const src = photo.startsWith('http') ? photo : `${API_URL}${photo}`;
+                return <img src={src} alt="provider" className="w-full h-full object-cover" />;
+              })()
             ) : (
               (service.provider?.businessName || service.provider?.name || "?").charAt(0).toUpperCase()
             )}

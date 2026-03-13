@@ -400,7 +400,19 @@ export default function ServiceDetailPage() {
               <div className="border border-gray-200 rounded-2xl p-8 hover:border-emerald-200 transition-colors bg-white">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
                   <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center text-white font-bold text-3xl shrink-0 overflow-hidden text-emerald-600">
-                    {service.provider.name.charAt(0).toUpperCase()}
+                    {(service.provider as any).photos && (service.provider as any).photos.length > 0 ? (
+                      (() => {
+                        let photo = (service.provider as any).photos[0];
+                        if (photo.includes('localhost:5000') || photo.includes('findzy-backend-1.onrender.com')) {
+                          const parts = photo.split('/uploads/');
+                          if (parts.length > 1) photo = `/uploads/${parts[1]}`;
+                        }
+                        const src = photo.startsWith('http') ? photo : `${API_URL}${photo}`;
+                        return <img src={src} alt="provider" className="w-full h-full object-cover" />;
+                      })()
+                    ) : (
+                      service.provider.name.charAt(0).toUpperCase()
+                    )}
                   </div>
 
                   <div className="flex-1">
