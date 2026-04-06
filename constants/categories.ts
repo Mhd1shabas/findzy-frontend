@@ -25,12 +25,5 @@ export const COLLEGES = [
   "IIT Madras",
   "BITS Pilani",
   "NIT Trichy",
-  "Delhi University",
-  "Mumbai University",
-  "Amity University",
-  "Manipal Academy",
-  "Christ University",
-  "SRM University",
-  "VIT Vellore",
   "Other"
 ];

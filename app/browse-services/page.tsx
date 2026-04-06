@@ -133,40 +133,16 @@ function ServicesContent() {
         title="Find Student Services"
         subtitle="Book video editing, design, tutoring, and more from fellow students"
         className="!py-16"
-      />
-
-      {/* Top Filter Bar */}
-      <div className="bg-white border-b border-gray-100 shadow-sm transition-all sticky top-[64px] z-30">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <div className="flex-1 w-full">
-              <SearchBox
-                placeholder="Search services (e.g., video editing)..."
-                value={filters.search}
-                onChange={(val) => handleFilterChange("search", val)}
-                onSearch={fetchServices}
-              />
-            </div>
-            <div className="w-full md:w-80">
-              <div className="relative group">
-                <select
-                  value={filters.college}
-                  onChange={(e) => handleFilterChange("college", e.target.value)}
-                  className="w-full h-[58px] bg-gray-50 border border-gray-100 rounded-2xl md:rounded-full px-6 shadow-none focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-[15px] font-bold text-gray-700 transition-all appearance-none cursor-pointer pr-12"
-                >
-                  <option value="">All Colleges</option>
-                  {COLLEGES.map((college) => (
-                    <option key={college} value={college}>{college}</option>
-                  ))}
-                </select>
-                <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-emerald-600">
-                  <MapPin className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-          </div>
+      >
+        <div className="w-full max-w-md mt-6 sm:mt-0">
+          <SearchBox
+            placeholder="Search services (e.g., video editing)..."
+            value={filters.search}
+            onChange={(val) => handleFilterChange("search", val)}
+            onSearch={fetchServices}
+          />
         </div>
-      </div>
+      </HeroSection>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
@@ -175,7 +151,7 @@ function ServicesContent() {
             onClick={() => setShowMobileFilters(!showMobileFilters)}
             className="md:hidden flex items-center justify-between w-full bg-white p-4 rounded-xl shadow-[0_2px_10px_rgb(0,0,0,0.04)] border border-gray-100 font-bold text-gray-700 hover:border-emerald-200 transition-colors"
           >
-            <span>Marketplace Filters</span>
+            <span>Select College & Filters</span>
             <span>{showMobileFilters ? "−" : "+"}</span>
           </button>
 
@@ -208,13 +184,13 @@ function ServicesContent() {
                   </select>
                 </div>
 
-                {/* College Filter */}
+                {/* College Filter - REQUESTED RE-INSTALLATION */}
                 <div>
                   <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">COLLEGE</label>
                   <select
                     value={filters.college}
                     onChange={(e) => handleFilterChange("college", e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-[13px] font-semibold text-gray-700 transition-all appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-[13px] font-semibold text-gray-700 transition-all appearance-none cursor-pointer shadow-sm border-emerald-50 focus:border-emerald-500"
                   >
                     <option value="">All Colleges</option>
                     {COLLEGES.map((college) => (
