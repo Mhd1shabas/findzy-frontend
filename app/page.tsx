@@ -5,7 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import ServiceCard from "@/components/shared/ServiceCard";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { CATEGORIES } from "@/constants/categories";
+import { CATEGORIES, COLLEGES } from "@/constants/categories";
 
 import { LucideIcon, Palette, Video, Camera, PenTool, Code, BookOpen, Compass } from "lucide-react";
 import { Service } from "@/types";
@@ -24,6 +24,7 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [recentServices, setRecentServices] = useState<Service[]>([]);
   const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({});
+  const [selectedCollege, setSelectedCollege] = useState("");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -31,8 +32,11 @@ export default function HomePage() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/browse-services?search=${encodeURIComponent(searchQuery.trim())}`);
+    if (searchQuery.trim() || selectedCollege) {
+      const params = new URLSearchParams();
+      if (searchQuery.trim()) params.append("search", searchQuery.trim());
+      if (selectedCollege) params.append("college", selectedCollege);
+      router.push(`/browse-services?${params.toString()}`);
     }
   };
 
@@ -100,6 +104,16 @@ export default function HomePage() {
               placeholder="Search for a service (e.g. video editing, tutor)..."
               className="flex-1 rounded-lg border-0 px-6 py-4 text-lg focus:ring-2 focus:ring-primary focus:outline-none"
             />
+            <select
+              value={selectedCollege}
+              onChange={(e) => setSelectedCollege(e.target.value)}
+              className="hidden sm:block border-l border-gray-200 px-4 py-4 text-gray-600 focus:outline-none bg-transparent font-semibold"
+            >
+              <option value="">All Colleges</option>
+              {COLLEGES.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
             <button
               type="submit"
               className="rounded-xl bg-primary px-8 py-4 text-white font-semibold hover:bg-primary-dark transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"

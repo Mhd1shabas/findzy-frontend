@@ -7,8 +7,8 @@ import { HeroSection } from "@/components/ui/HeroSection";
 import { SearchBox } from "@/components/ui/SearchBox";
 import { Card } from "@/components/ui/Card";
 import ServiceCard from "@/components/shared/ServiceCard";
-import { Heart } from "lucide-react";
-import { CATEGORIES } from "@/constants/categories";
+import { Heart, MapPin, SlidersHorizontal } from "lucide-react";
+import { CATEGORIES, COLLEGES } from "@/constants/categories";
 import { API_URL } from "@/lib/api";
 
 import { Service } from "@/types";
@@ -33,6 +33,7 @@ function ServicesContent() {
     maxPrice: "",
     search: "",
     sort: "newest",
+    college: "",
   });
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -92,6 +93,7 @@ function ServicesContent() {
       if (filters.minPrice) queryParams.append("minPrice", filters.minPrice);
       if (filters.maxPrice) queryParams.append("maxPrice", filters.maxPrice);
       if (filters.search) queryParams.append("search", filters.search);
+      if (filters.college) queryParams.append("college", filters.college);
 
       if (filters.sort === "price_asc") {
         queryParams.append("sort", "price");
@@ -132,13 +134,34 @@ function ServicesContent() {
         subtitle="Book video editing, design, tutoring, and more from fellow students"
         className="!py-12"
       >
-        <div className="w-full max-w-md mt-6 sm:mt-0">
-          <SearchBox
-            placeholder="Search services (e.g., video editing)..."
-            value={filters.search}
-            onChange={(val) => handleFilterChange("search", val)}
-            onSearch={fetchServices}
-          />
+        <div className="w-full max-w-5xl mt-6 sm:mt-10">
+          <div className="flex flex-col md:flex-row items-stretch gap-4">
+            <div className="flex-1">
+              <SearchBox
+                placeholder="Search services (e.g., video editing)..."
+                value={filters.search}
+                onChange={(val) => handleFilterChange("search", val)}
+                onSearch={fetchServices}
+              />
+            </div>
+            <div className="w-full md:w-64">
+              <div className="relative group">
+                <select
+                  value={filters.college}
+                  onChange={(e) => handleFilterChange("college", e.target.value)}
+                  className="w-full h-[58px] bg-white border border-gray-100 rounded-2xl md:rounded-full px-6 shadow-[0_2px_10px_rgba(0,0,0,0.06)] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm font-bold text-gray-700 transition-all appearance-none cursor-pointer"
+                >
+                  <option value="">All Colleges</option>
+                  {COLLEGES.map((college) => (
+                    <option key={college} value={college}>{college}</option>
+                  ))}
+                </select>
+                <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-emerald-600">
+                  <MapPin className="w-4 h-4" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </HeroSection>
 
@@ -159,7 +182,7 @@ function ServicesContent() {
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-[17px] font-black text-gray-900 tracking-tight">Filters</h3>
                 <button
-                  onClick={() => setFilters({ category: "", minPrice: "", maxPrice: "", search: "", sort: "newest" })}
+                  onClick={() => setFilters({ category: "", minPrice: "", maxPrice: "", search: "", sort: "newest", college: "" })}
                   className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 hover:text-emerald-700 transition-colors"
                 >
                   Clear All
@@ -178,6 +201,21 @@ function ServicesContent() {
                     <option value="">All Categories</option>
                     {CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* College Filter */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Select College</label>
+                  <select
+                    value={filters.college}
+                    onChange={(e) => handleFilterChange("college", e.target.value)}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-[13px] font-semibold text-gray-700 transition-all appearance-none cursor-pointer"
+                  >
+                    <option value="">All Colleges</option>
+                    {COLLEGES.map((college) => (
+                      <option key={college} value={college}>{college}</option>
                     ))}
                   </select>
                 </div>
@@ -238,17 +276,17 @@ function ServicesContent() {
               <div className="text-center py-16">
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                  {filters.category || filters.search || filters.minPrice || filters.maxPrice ? "No services found" : "No services yet"}
+                  {filters.college ? "No providers found for this college" : (filters.category || filters.search || filters.minPrice || filters.maxPrice ? "No services found" : "No services yet")}
                 </h3>
                 <p className="text-gray-500 mb-6">
                   {filters.category || filters.search || filters.minPrice || filters.maxPrice
                     ? "Try different filters or clear your search."
                     : "Be the first to post a service on Findzy!"}
                 </p>
-                {(filters.category || filters.search || filters.minPrice || filters.maxPrice) ? (
+                {(filters.category || filters.search || filters.minPrice || filters.maxPrice || filters.college) ? (
                   <button
                     onClick={() => {
-                      setFilters({ category: "", minPrice: "", maxPrice: "", search: "", sort: "newest" });
+                      setFilters({ category: "", minPrice: "", maxPrice: "", search: "", sort: "newest", college: "" });
                       if (searchParams.get("category")) {
                         router.push("/browse-services");
                       }

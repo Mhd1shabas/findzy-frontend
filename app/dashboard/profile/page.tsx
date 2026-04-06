@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { CATEGORIES } from "@/constants/categories";
+import { CATEGORIES, COLLEGES } from "@/constants/categories";
 import { API_URL } from "@/lib/api";
 
 type UserProfile = {
@@ -15,6 +15,7 @@ type UserProfile = {
   phone?: string;
   whatsapp?: string;
   university?: string;
+  college?: string;
   major?: string;
   yearOfStudy?: string;
   skills?: string[];
@@ -291,6 +292,21 @@ export default function EditProfilePage() {
                     />
                   </div>
                   <div className="space-y-1">
+                    <label className="text-xs font-bold text-gray-500 ml-1">College</label>
+                    <select
+                      name="college"
+                      value={form.college || ""}
+                      onChange={handleChange}
+                      disabled={!isEditing}
+                      className="w-full rounded-xl border border-gray-100 bg-gray-50/50 px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition disabled:opacity-75 disabled:cursor-default appearance-none"
+                    >
+                      <option value="">Select college</option>
+                      {COLLEGES.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="space-y-1">
                     <label className="text-xs font-bold text-gray-500 ml-1">Year of Study</label>
                     <select
                       name="yearOfStudy"
@@ -345,6 +361,17 @@ export default function EditProfilePage() {
                       className="w-full rounded-xl border border-gray-100 bg-gray-50/50 px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition disabled:opacity-75 disabled:cursor-default"
                     />
                   </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <label className="text-xs font-bold text-gray-500 ml-1">Skills (comma separated)</label>
+                    <input
+                      name="skills"
+                      value={Array.isArray(form.skills) ? form.skills.join(", ") : form.skills || ""}
+                      onChange={(e) => setForm({ ...form, skills: e.target.value.split(",").map(s => s.trim()) })}
+                      disabled={!isEditing}
+                      placeholder="React, Design, Photography..."
+                      className="w-full rounded-xl border border-gray-100 bg-gray-50/50 px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition disabled:opacity-75 disabled:cursor-default"
+                    />
+                  </div>
 
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-gray-500 ml-1">General Availability</label>
@@ -368,8 +395,8 @@ export default function EditProfilePage() {
               <div className="space-y-1">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-3 pt-4 border-t border-gray-50">About Me</h3>
                 <textarea
-                  name="bio"
-                  value={form.bio || ""}
+                  name="about"
+                  value={form.about || ""}
                   onChange={handleChange}
                   disabled={!isEditing}
                   rows={4}

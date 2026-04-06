@@ -100,17 +100,18 @@ export default function ServiceCard({
             let firstImage = images[0];
             
             if (typeof firstImage === 'string') {
-              // Fix for hardcoded URLs in DB: if it contains localhost or onrender, extract the relative path
-              if (firstImage.includes('localhost:5000') || firstImage.includes('findzy-backend-1.onrender.com')) {
-                const parts = firstImage.split('/uploads/');
-                if (parts.length > 1) {
-                  firstImage = `/uploads/${parts[1]}`;
-                }
-              }
+               // Robust path extraction: try to get everything from /uploads onwards
+               const uploadMatch = firstImage.match(/\/uploads\/(.+)$/i);
+               if (uploadMatch) {
+                 firstImage = `/uploads/${uploadMatch[1]}`;
+               }
+               
+               // Fix Windows backslashes
+               firstImage = firstImage.replace(/\\/g, '/');
 
-              const src = firstImage.startsWith('http')
-                ? firstImage
-                : (firstImage.startsWith('/') ? `${API_URL}${firstImage}` : `${API_URL}/${firstImage}`);
+               const src = firstImage.startsWith('http')
+                 ? firstImage
+                 : (firstImage.startsWith('/') ? `${API_URL}${firstImage}` : `${API_URL}/${firstImage}`);
 
               return (
                 <img
@@ -141,12 +142,17 @@ export default function ServiceCard({
         })()}
 
         {/* Gradient Overlay for bottom text readability if needed natively, skip for now */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 poimter-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
-        <div className="absolute top-4 left-4 z-10">
+        <div className="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
           <span className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-black text-emerald-700 shadow-sm uppercase tracking-wider">
             {service.category}
           </span>
+          {(service.college || service.provider?.college || service.provider?.university) && (
+            <span className="bg-blue-600/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-black text-white shadow-sm uppercase tracking-wider">
+              {service.college || service.provider?.college || service.provider?.university}
+            </span>
+          )}
         </div>
       </div>
 
@@ -161,7 +167,7 @@ export default function ServiceCard({
                   const parts = photo.split('/uploads/');
                   if (parts.length > 1) photo = `/uploads/${parts[1]}`;
                 }
-                const src = photo.startsWith('http') ? photo : `${API_URL}${photo}`;
+                const src = photo.startsWith('http') ? photo : (photo.startsWith('/') ? `${API_URL}${photo}` : `${API_URL}/${photo}`);
                 return <img src={src} alt="provider" className="w-full h-full object-cover" />;
               })()
             ) : (

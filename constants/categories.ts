@@ -15,3 +15,22 @@ export const CATEGORIES = [
   "Freelancers",
   "Other"
 ];
+
+export const COLLEGES = [
+  "CEV",
+  "CET",
+  "KMCT",
+  "IIT Bombay",
+  "IIT Delhi",
+  "IIT Madras",
+  "BITS Pilani",
+  "NIT Trichy",
+  "Delhi University",
+  "Mumbai University",
+  "Amity University",
+  "Manipal Academy",
+  "Christ University",
+  "SRM University",
+  "VIT Vellore",
+  "Other"
+];

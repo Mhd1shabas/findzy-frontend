@@ -6,6 +6,7 @@ export interface User {
   photos?: string[];
   businessName?: string;
   university?: string;
+  college?: string;
   major?: string;
   year?: string;
   whatsapp?: string;
@@ -23,6 +24,7 @@ export interface Service {
   title: string;
   description: string;
   category: string;
+  college?: string;
   location: string;
   price: number;
   priceType: string;
@@ -38,6 +40,7 @@ export interface Service {
     name: string;
     businessName?: string;
     university?: string;
+    college?: string;
     major?: string;
     about?: string;
     averageRating?: number;

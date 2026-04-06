@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Booking, User } from "@/types";
 import { API_URL } from "@/lib/api";
+import Image from "next/image";
 
 export default function ProviderBookingsPage() {
     const [bookings, setBookings] = useState<Booking[]>([]);
@@ -27,38 +28,38 @@ export default function ProviderBookingsPage() {
     const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+
+                const userRes = await fetch(`${API_URL}/api/auth/me`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                if (userRes.ok) {
+                    setUser(await userRes.json());
+                }
+
+                const bookRes = await fetch(`${API_URL}/api/bookings/provider`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                if (bookRes.ok) {
+                    const data = await bookRes.json();
+                    setBookings(data);
+                }
+            } catch (error) {
+                console.error("Error fetching provider bookings:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         if (!token) {
             router.push("/login");
             return;
         }
         fetchData();
     }, [token, router]);
-
-    const fetchData = async () => {
-        try {
-            setLoading(true);
-
-            const userRes = await fetch(`${API_URL}/api/auth/me`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            if (userRes.ok) {
-                setUser(await userRes.json());
-            }
-
-            const bookRes = await fetch(`${API_URL}/api/bookings/provider`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-
-            if (bookRes.ok) {
-                const data = await bookRes.json();
-                setBookings(data);
-            }
-        } catch (error) {
-            console.error("Error fetching provider bookings:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleUpdateStatus = async (bookingId: string, newStatus: string) => {
         try {
@@ -141,7 +142,13 @@ export default function ProviderBookingsPage() {
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                         <div className="flex gap-4">
                                             {booking.userId?.photos && booking.userId.photos.length > 0 ? (
-                                                <img src={booking.userId.photos[0]} alt="client" className="w-16 h-16 rounded-2xl object-cover shrink-0 border border-gray-100" />
+                                                <Image 
+                                                    src={booking.userId.photos[0]} 
+                                                    alt="client" 
+                                                    width={64}
+                                                    height={64}
+                                                    className="w-16 h-16 rounded-2xl object-cover shrink-0 border border-gray-100" 
+                                                />
                                             ) : (
                                                 <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 shrink-0 border border-gray-100">
                                                     <UserIcon className="w-8 h-8" />
@@ -230,7 +237,7 @@ export default function ProviderBookingsPage() {
                                                 <div className="flex gap-2">
                                                     {booking.userId?.phone || booking.userId?.whatsapp ? (
                                                         <a
-                                                            href={`https://wa.me/${(booking.userId?.whatsapp || booking.userId?.phone || "").replace(/\D/g, "")}?text=${encodeURIComponent(`Hi ${booking.userId?.name || "Client"}, I accepted your booking for ${booking.serviceId?.title || "Service"} on Findzy. Let's discuss the details.`)}`}
+                                                            href={`https://wa.me/${(booking.userId?.whatsapp || booking.userId?.phone || "").replace(/\D/g, "")}?text=${encodeURIComponent(`Hi ${booking.userId?.name || "Client"}, I'm currently working on your booking for ${booking.serviceId?.title || "Service"} on Findzy.`)}`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="flex items-center gap-1.5 px-4 py-2 bg-indigo-50 border border-indigo-200 text-indigo-700 rounded-xl font-bold hover:bg-indigo-100 transition shadow-sm text-sm"
