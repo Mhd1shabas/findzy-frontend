@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CATEGORIES, COLLEGES } from "@/constants/categories";
 
-import { LucideIcon, Palette, Video, Camera, PenTool, Code, BookOpen, Compass } from "lucide-react";
+import { LucideIcon, Palette, Video, Camera, PenTool, Code, BookOpen, Compass, MapPin } from "lucide-react";
 import { Service } from "@/types";
 import { API_URL } from "@/lib/api";
 
@@ -96,27 +96,33 @@ export default function HomePage() {
 
           <form
             onSubmit={handleSearch}
-            className="mx-auto flex max-w-2xl gap-3 rounded-2xl bg-white p-4 shadow-lg border border-gray-200"
+            className="mx-auto flex flex-col sm:flex-row max-w-2xl gap-3 rounded-2xl bg-white p-3 sm:p-4 shadow-xl border border-gray-100"
           >
-            <input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for a service (e.g. video editing, tutor)..."
-              className="flex-1 rounded-lg border-0 px-6 py-4 text-lg focus:ring-2 focus:ring-primary focus:outline-none"
-            />
-            <select
-              value={selectedCollege}
-              onChange={(e) => setSelectedCollege(e.target.value)}
-              className="hidden sm:block border-l border-gray-200 px-4 py-4 text-gray-600 focus:outline-none bg-transparent font-semibold"
-            >
-              <option value="">All Colleges</option>
-              {COLLEGES.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
+            <div className="flex-1 min-w-0">
+              <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Find a service (e.g. tutor)..."
+                className="w-full rounded-xl border-none px-4 py-3 sm:py-4 text-base sm:text-lg focus:ring-2 focus:ring-primary focus:outline-none placeholder:text-gray-400"
+              />
+            </div>
+            <div className="flex items-center border-t sm:border-t-0 sm:border-l border-gray-100 gap-2 px-2 sm:px-4 py-2 sm:py-0">
+               <MapPin className="w-4 h-4 text-emerald-600 sm:hidden" />
+               <select
+                 value={selectedCollege}
+                 onChange={(e) => setSelectedCollege(e.target.value)}
+                 className="flex-1 sm:flex-none py-3 sm:py-4 text-gray-700 focus:outline-none bg-transparent font-bold text-sm sm:text-[15px] appearance-none cursor-pointer min-w-[140px]"
+               >
+                 <option value="">All Colleges</option>
+                 {COLLEGES.map((c) => (
+                   <option key={c} value={c}>{c}</option>
+                 ))}
+               </select>
+               <MapPin className="hidden sm:block w-4 h-4 text-emerald-600" />
+            </div>
             <button
               type="submit"
-              className="rounded-xl bg-primary px-8 py-4 text-white font-semibold hover:bg-primary-dark transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="rounded-xl bg-primary px-8 py-3.5 sm:py-4 text-white font-bold hover:bg-primary-dark transition-all duration-200 shadow-md hover:shadow-lg transform active:scale-95"
             >
               Search
             </button>
