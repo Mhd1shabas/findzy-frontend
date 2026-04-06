@@ -112,7 +112,7 @@ function ServicesContent() {
         return;
       }
       const data = await res.json();
-      setServices(data.services || []);
+      setServices(Array.isArray(data) ? data : (data.services || []));
     } catch (error) {
       console.error("Failed to fetch services:", error);
     } finally {
@@ -132,11 +132,14 @@ function ServicesContent() {
       <HeroSection
         title="Find Student Services"
         subtitle="Book video editing, design, tutoring, and more from fellow students"
-        className="!py-12"
-      >
-        <div className="w-full max-w-5xl mt-6 sm:mt-10">
-          <div className="flex flex-col md:flex-row items-stretch gap-4">
-            <div className="flex-1">
+        className="!py-16"
+      />
+
+      {/* Top Filter Bar */}
+      <div className="bg-white border-b border-gray-100 shadow-sm transition-all sticky top-[64px] z-30">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <div className="flex-1 w-full">
               <SearchBox
                 placeholder="Search services (e.g., video editing)..."
                 value={filters.search}
@@ -144,12 +147,12 @@ function ServicesContent() {
                 onSearch={fetchServices}
               />
             </div>
-            <div className="w-full md:w-64">
+            <div className="w-full md:w-80">
               <div className="relative group">
                 <select
                   value={filters.college}
                   onChange={(e) => handleFilterChange("college", e.target.value)}
-                  className="w-full h-[58px] bg-white border border-gray-100 rounded-2xl md:rounded-full px-6 shadow-[0_2px_10px_rgba(0,0,0,0.06)] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm font-bold text-gray-700 transition-all appearance-none cursor-pointer"
+                  className="w-full h-[58px] bg-gray-50 border border-gray-100 rounded-2xl md:rounded-full px-6 shadow-none focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-[15px] font-bold text-gray-700 transition-all appearance-none cursor-pointer pr-12"
                 >
                   <option value="">All Colleges</option>
                   {COLLEGES.map((college) => (
@@ -163,7 +166,7 @@ function ServicesContent() {
             </div>
           </div>
         </div>
-      </HeroSection>
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
