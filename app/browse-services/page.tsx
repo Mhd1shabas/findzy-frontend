@@ -210,7 +210,7 @@ function ServicesContent() {
 
                 {/* College Filter */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Select College</label>
+                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">COLLEGE</label>
                   <select
                     value={filters.college}
                     onChange={(e) => handleFilterChange("college", e.target.value)}
